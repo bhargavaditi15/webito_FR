@@ -87,6 +87,29 @@ conn.commit()
 
 print(f"Attendance Marked: {person_name} - {status} at {timestamp} on {date} ({day})")
 
+# Fetch all attendance records from the 'attendance' table
+cursor.execute("SELECT * FROM attendance")
+attendance_records = cursor.fetchall()
+
+# Check if any records are fetched
+if not attendance_records:
+    print("No attendance records found!")
+else:
+    # Open a CSV file to write the attendance records
+    with open("attendance_data.csv", mode="w", newline="") as file:
+        writer = csv.writer(file)
+
+        # Write the header row
+        writer.writerow(["ID", "Date", "Day", "Name", "Time", "Status"])
+
+        # Write the attendance records
+        for record in attendance_records:
+            record_id, date, day, name, time, status = record
+            writer.writerow([record_id, date, day, name, time, status])
+
+    print("Attendance data has been written to attendance_data.csv")
+
+
 # Close database connection
 cursor.close()
 conn.close()
