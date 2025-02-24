@@ -1,0 +1,162 @@
+<!-- <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition CCTV</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        img { width: 80%; border-radius: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Live CCTV Face Recognition</h2>
+    <img src="{{ url_for('video_feed') }}" alt="CCTV Feed">
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition CCTV</title>
+    <style>
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        img {
+            width: 80%; 
+            max-width: 700px;
+            border-radius: 10px; 
+            margin-top: 20px; 
+            border: 2px solid #333;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 90%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        input, button {
+            padding: 10px;
+            width: 80%;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Live CCTV Face Recognition</h2>
+    
+    <!-- CCTV Video Feed -->
+    <img src="{{ url_for('video_feed') }}" alt="CCTV Feed">
+
+    <!-- Face Data Capture Form -->
+    <div class="container">
+        <h3>Capture Face Data</h3>
+        <form action="/capture" method="POST">
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <button type="submit">Start Capturing</button>
+        </form>
+    </div>
+
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition CCTV</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        img { width: 60%; border-radius: 10px; margin-top: 20px; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>Live CCTV Face Recognition</h2>
+
+    <img src="{{ url_for('video_feed') }}" alt="CCTV Feed">
+
+    <form action="/capture" method="post">
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <button type="submit">Start Capture</button>
+    </form>
+
+    <form action="/recognize" method="post">
+        <button type="submit">Start Recognition</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <h3>{{ messages[0] }}</h3>
+        {% endif %}
+    {% endwith %}
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition CCTV</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        img { width: 80%; border-radius: 10px; margin-top: 20px; }
+        button { padding: 10px; margin: 10px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h2>Live CCTV Face Recognition</h2>
+    <img src="{{ url_for('video_feed') }}" alt="CCTV Feed">
+    
+    <h3>Enter Name:</h3>
+    <input type="text" id="nameInput">
+    <button onclick="startCapture()">Start Capturing</button>
+
+    <button onclick="markAttendance()">Mark Attendance</button>
+
+    <script>
+        function startCapture() {
+            let name = document.getElementById("nameInput").value;
+            fetch('/start_capture', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `name=${name}`
+            }).then(response => response.json()).then(data => alert(data.message));
+        }
+
+        function markAttendance() {
+            fetch('/mark_attendance').then(response => response.json()).then(data => alert(data.message));
+        }
+    </script>
+</body>
+</html>
