@@ -1,15 +1,30 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Register Face</title>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <h1>Register Face</h1>
-    <form action='/register' method='post'>
-        <label for='name'>Enter Name:</label>
-        <input type='text' name='name' required>
-        <button type='submit'>Capture Face</button>
-    </form>
-    <a href='/'>Back</a>
+    {% include 'base.html' %}
+    
+    <div class="container">
+        <h1>Register Face</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p style="color: green;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action='/register' method='post'>
+            <label for='name'>Enter Name:</label>
+            <input type='text' name='name' required>
+            <button type='submit'>Capture Face</button>
+        </form>
+        <a href='/'>Back</a>
+    </div>
 </body>
 </html>
